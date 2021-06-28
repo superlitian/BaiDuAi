@@ -2,6 +2,10 @@
 
 百度人工智能模块go语言SDK，持续更新中
 
+# 安装
+
+> go get github.com/iscoderLee/BaiDuAiHelp
+
 # 使用说明
 
 - 使用示例（人脸检测接口）
