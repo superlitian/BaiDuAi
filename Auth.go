@@ -1,8 +1,4 @@
-package auth
-
-import (
-	"../httpUtil"
-)
+package BaiDu_Ai
 
 const requrl = "https://aip.baidubce.com/oauth/2.0/token"
 
@@ -12,7 +8,7 @@ func Oauth(apiKey string, secretKey string) string {
 		"client_id":     apiKey,
 		"client_secret": secretKey,
 	}
-	h := httpUtil.NewHttpSend(httpUtil.GetUrlBuild(requrl, param))
+	h := NewHttpSend(GetUrlBuild(requrl, param))
 	res, err := h.Get()
 	if err != nil {
 		return err.Error()
