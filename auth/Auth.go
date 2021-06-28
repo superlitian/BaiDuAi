@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"BaiDu.Ai/httpUtil"
+	"../httpUtil"
 )
 
 const requrl = "https://aip.baidubce.com/oauth/2.0/token"

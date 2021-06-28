@@ -1,9 +1,9 @@
 package face
 
 import (
-	"BaiDu.Ai/auth"
-	comutil "BaiDu.Ai/comutil"
-	"BaiDu.Ai/httpUtil"
+	"../auth"
+	comutil "../comutil"
+	"../httpUtil"
 	"encoding/json"
 	"errors"
 	"strings"
