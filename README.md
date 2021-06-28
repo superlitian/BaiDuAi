@@ -16,14 +16,16 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/iscoderLee/BaiDuAiHelp/face"
+	"github.com/iscoderLee/BaiDuAiHelp"
 	"io/ioutil"
 )
 
 func main() {
-	//此处为百度AI应用的鉴权信息
-	appid, apikey, secretkey := "", "", ""
-	client, err := face.NewAipFace(appid, apikey, secretkey)
+	//百度智能云控制台获取的AI应用鉴权信息
+	appid := ""
+	apikey := ""
+	secretkey := ""
+	client, err := BaiDu_Ai.NewAipFace(appid, apikey, secretkey)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
