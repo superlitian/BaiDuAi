@@ -1,9 +1,6 @@
-package face
+package BaiDu_Ai
 
 import (
-	"../auth"
-	comutil "../comutil"
-	"../httpUtil"
 	"encoding/json"
 	"errors"
 	"strings"
@@ -76,11 +73,11 @@ const faceverifyUrl = "https://aip.baidubce.com/rest/2.0/face/v3/faceverify"
 const videoverifyUrl = "https://aip.baidubce.com/rest/2.0/face/v1/faceliveness/verify"
 
 func NewAipFace(_appId string, _apiKey string, _secretKey string) (*AipFace, error) {
-	res := auth.Oauth(_apiKey, _secretKey)
+	res := Oauth(_apiKey, _secretKey)
 	data := map[string]string{}
 	json.Unmarshal([]byte(res), &data)
-	keys := comutil.GetKeys(data)
-	if !comutil.In("access_token", keys) {
+	keys := GetKeys(data)
+	if !In("access_token", keys) {
 		return nil, errors.New(res)
 	}
 	_accessToken := data["access_token"]
@@ -101,13 +98,13 @@ func NewAipFace(_appId string, _apiKey string, _secretKey string) (*AipFace, err
 }
 
 func (client *AipFace) Detect(image string, imageType string, options map[string]string) string {
-	require := httpUtil.GetUrlBuild(detectUrl, client.accessToken)
+	require := GetUrlBuild(detectUrl, client.accessToken)
 	if options == nil {
 		options = map[string]string{}
 	}
 	options["image"] = image
 	options["image_type"] = imageType
-	h := httpUtil.NewHttpSend(require)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -118,8 +115,8 @@ func (client *AipFace) Detect(image string, imageType string, options map[string
 }
 
 func (client *AipFace) Match(images []map[string]string) string {
-	require := httpUtil.GetUrlBuild(matchUrl, client.accessToken)
-	h := httpUtil.NewHttpSend(require)
+	require := GetUrlBuild(matchUrl, client.accessToken)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(images)
 	res, err := h.Post()
@@ -130,14 +127,14 @@ func (client *AipFace) Match(images []map[string]string) string {
 }
 
 func (client *AipFace) Search(image string, imageType string, groupIdList string, options map[string]string) string {
-	require := httpUtil.GetUrlBuild(searchUrl, client.accessToken)
+	require := GetUrlBuild(searchUrl, client.accessToken)
 	if options == nil {
 		options = map[string]string{}
 	}
 	options["image"] = image
 	options["image_type"] = imageType
 	options["group_id_list"] = groupIdList
-	h := httpUtil.NewHttpSend(require)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -148,14 +145,14 @@ func (client *AipFace) Search(image string, imageType string, groupIdList string
 }
 
 func (client *AipFace) MultiSearch(image string, imageType string, groupIdList string, options map[string]string) string {
-	require := httpUtil.GetUrlBuild(multiSearchUrl, client.accessToken)
+	require := GetUrlBuild(multiSearchUrl, client.accessToken)
 	if options == nil {
 		options = map[string]string{}
 	}
 	options["image"] = image
 	options["image_type"] = imageType
 	options["group_id_list"] = groupIdList
-	h := httpUtil.NewHttpSend(require)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -166,7 +163,7 @@ func (client *AipFace) MultiSearch(image string, imageType string, groupIdList s
 }
 
 func (client *AipFace) AddUser(image string, imageType string, groupId string, userId string, options map[string]string) string {
-	require := httpUtil.GetUrlBuild(addUserUrl, client.accessToken)
+	require := GetUrlBuild(addUserUrl, client.accessToken)
 	if options == nil {
 		options = map[string]string{}
 	}
@@ -174,7 +171,7 @@ func (client *AipFace) AddUser(image string, imageType string, groupId string, u
 	options["image_type"] = imageType
 	options["group_id"] = groupId
 	options["user_id"] = userId
-	h := httpUtil.NewHttpSend(require)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -185,7 +182,7 @@ func (client *AipFace) AddUser(image string, imageType string, groupId string, u
 }
 
 func (client *AipFace) UpdateUser(image string, imageType string, groupId string, userId string, options map[string]string) string {
-	require := httpUtil.GetUrlBuild(updateUserUrl, client.accessToken)
+	require := GetUrlBuild(updateUserUrl, client.accessToken)
 	if options == nil {
 		options = map[string]string{}
 	}
@@ -193,7 +190,7 @@ func (client *AipFace) UpdateUser(image string, imageType string, groupId string
 	options["image_type"] = imageType
 	options["group_id"] = groupId
 	options["user_id"] = userId
-	h := httpUtil.NewHttpSend(require)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -203,13 +200,13 @@ func (client *AipFace) UpdateUser(image string, imageType string, groupId string
 	return string(res)
 }
 func (client *AipFace) FaceDelete(user_id string, group_id string, face_token string) string {
-	require := httpUtil.GetUrlBuild(faceDeleteUrl, client.accessToken)
+	require := GetUrlBuild(faceDeleteUrl, client.accessToken)
 	options := map[string]string{
 		"user_id":    user_id,
 		"group_id":   group_id,
 		"face_token": face_token,
 	}
-	h := httpUtil.NewHttpSend(require)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -220,12 +217,12 @@ func (client *AipFace) FaceDelete(user_id string, group_id string, face_token st
 }
 
 func (client *AipFace) GetUser(user_id string, group_id string) string {
-	require := httpUtil.GetUrlBuild(getUserUrl, client.accessToken)
+	require := GetUrlBuild(getUserUrl, client.accessToken)
 	options := map[string]string{
 		"user_id":  user_id,
 		"group_id": group_id,
 	}
-	h := httpUtil.NewHttpSend(require)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -236,12 +233,12 @@ func (client *AipFace) GetUser(user_id string, group_id string) string {
 }
 
 func (client *AipFace) FaceGetlist(user_id string, group_id string) string {
-	require := httpUtil.GetUrlBuild(faceGetlistUrl, client.accessToken)
+	require := GetUrlBuild(faceGetlistUrl, client.accessToken)
 	options := map[string]string{
 		"user_id":  user_id,
 		"group_id": group_id,
 	}
-	h := httpUtil.NewHttpSend(require)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -252,12 +249,12 @@ func (client *AipFace) FaceGetlist(user_id string, group_id string) string {
 }
 
 func (client *AipFace) GetGroupUsers(group_id string, options map[string]string) string {
-	require := httpUtil.GetUrlBuild(getGroupUsersUrl, client.accessToken)
+	require := GetUrlBuild(getGroupUsersUrl, client.accessToken)
 	if options == nil {
 		options = map[string]string{}
 	}
 	options["group_id"] = group_id
-	h := httpUtil.NewHttpSend(require)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -267,12 +264,12 @@ func (client *AipFace) GetGroupUsers(group_id string, options map[string]string)
 	return string(res)
 }
 func (client *AipFace) UserCopy(user_id string, options map[string]string) string {
-	require := httpUtil.GetUrlBuild(userCopyUrl, client.accessToken)
+	require := GetUrlBuild(userCopyUrl, client.accessToken)
 	if options == nil {
 		options = map[string]string{}
 	}
 	options["user_id"] = user_id
-	h := httpUtil.NewHttpSend(require)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -283,12 +280,12 @@ func (client *AipFace) UserCopy(user_id string, options map[string]string) strin
 }
 
 func (client *AipFace) DeleteUser(group_id string, user_id string) string {
-	require := httpUtil.GetUrlBuild(deleteUserUrl, client.accessToken)
+	require := GetUrlBuild(deleteUserUrl, client.accessToken)
 	options := map[string]string{
 		"group_id": group_id,
 		"user_id":  user_id,
 	}
-	h := httpUtil.NewHttpSend(require)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -299,11 +296,11 @@ func (client *AipFace) DeleteUser(group_id string, user_id string) string {
 }
 
 func (client *AipFace) GroupAdd(group_id string) string {
-	require := httpUtil.GetUrlBuild(groupAddUrl, client.accessToken)
+	require := GetUrlBuild(groupAddUrl, client.accessToken)
 	options := map[string]string{
 		"group_id": group_id,
 	}
-	h := httpUtil.NewHttpSend(require)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -314,11 +311,11 @@ func (client *AipFace) GroupAdd(group_id string) string {
 }
 
 func (client *AipFace) GroupDelete(group_id string) string {
-	require := httpUtil.GetUrlBuild(groupDeleteUrl, client.accessToken)
+	require := GetUrlBuild(groupDeleteUrl, client.accessToken)
 	options := map[string]string{
 		"group_id": group_id,
 	}
-	h := httpUtil.NewHttpSend(require)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -329,8 +326,8 @@ func (client *AipFace) GroupDelete(group_id string) string {
 }
 
 func (client *AipFace) GetGroupList(options map[string]string) string {
-	require := httpUtil.GetUrlBuild(getGroupListUrl, client.accessToken)
-	h := httpUtil.NewHttpSend(require)
+	require := GetUrlBuild(getGroupListUrl, client.accessToken)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -341,7 +338,7 @@ func (client *AipFace) GetGroupList(options map[string]string) string {
 }
 
 func (client *AipFace) PersonVerify(image string, image_type string, id_card_number string, name string, options map[string]string) string {
-	require := httpUtil.GetUrlBuild(personVerifyUrl, client.accessToken)
+	require := GetUrlBuild(personVerifyUrl, client.accessToken)
 	if options == nil {
 		options = map[string]string{}
 	}
@@ -349,7 +346,7 @@ func (client *AipFace) PersonVerify(image string, image_type string, id_card_num
 	options["image_type"] = image_type
 	options["id_card_number"] = id_card_number
 	options["name"] = name
-	h := httpUtil.NewHttpSend(require)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -360,8 +357,8 @@ func (client *AipFace) PersonVerify(image string, image_type string, id_card_num
 }
 
 func (client *AipFace) Sessioncode(options map[string]string) string {
-	require := httpUtil.GetUrlBuild(sessioncodeUrl, client.accessToken)
-	h := httpUtil.NewHttpSend(require)
+	require := GetUrlBuild(sessioncodeUrl, client.accessToken)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -372,13 +369,13 @@ func (client *AipFace) Sessioncode(options map[string]string) string {
 }
 
 func (client *AipFace) Faceverify(image string, image_type string, options map[string]string) string {
-	require := httpUtil.GetUrlBuild(faceverifyUrl, client.accessToken)
+	require := GetUrlBuild(faceverifyUrl, client.accessToken)
 	if options == nil {
 		options = map[string]string{}
 	}
 	options["image"] = image
 	options["image_type"] = image_type
-	h := httpUtil.NewHttpSend(require)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
@@ -388,12 +385,12 @@ func (client *AipFace) Faceverify(image string, image_type string, options map[s
 	return string(res)
 }
 func (client *AipFace) VideoVerify(video_base64 string, options map[string]string) string {
-	require := httpUtil.GetUrlBuild(videoverifyUrl, client.accessToken)
+	require := GetUrlBuild(videoverifyUrl, client.accessToken)
 	if options == nil {
 		options = map[string]string{}
 	}
 	options["video_base64"] = video_base64
-	h := httpUtil.NewHttpSend(require)
+	h := NewHttpSend(require)
 	h.SetSendType("JSON")
 	h.SetBody(options)
 	res, err := h.Post()
