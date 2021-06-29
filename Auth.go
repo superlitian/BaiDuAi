@@ -1,6 +1,6 @@
 package BaiDu_Ai
 
-const requrl = "https://aip.baidubce.com/oauth/2.0/token"
+const authurl = "https://aip.baidubce.com/oauth/2.0/token"
 
 func Oauth(apiKey string, secretKey string) string {
 	param := map[string]string{
@@ -8,7 +8,7 @@ func Oauth(apiKey string, secretKey string) string {
 		"client_id":     apiKey,
 		"client_secret": secretKey,
 	}
-	h := NewHttpSend(GetUrlBuild(requrl, param))
+	h := NewHttpSend(GetUrlBuild(authurl, param))
 	res, err := h.Get()
 	if err != nil {
 		return err.Error()
