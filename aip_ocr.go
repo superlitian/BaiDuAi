@@ -1,3 +1,14 @@
+/* Copyright 2021 CoderLee Inc. All Rights Reserved. */
+/* aip_ocr.go - OCR模块 */
+/* modification history
+-----------------------
+2021/6/30, by coderlee, 创建
+*/
+/*
+DESCRIPTION
+	OCR模块各接口的封装，包含OCR所有场景
+*/
+
 package BaiDu_Ai
 
 import (
