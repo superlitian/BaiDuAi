@@ -1,3 +1,14 @@
+/* Copyright 2021 CoderLee Inc. All Rights Reserved. */
+/* aip_face.go - 人脸模块 */
+/* modification history
+-----------------------
+2021/6/30, by coderlee, 创建
+*/
+/*
+DESCRIPTION
+	人脸模块的封装，包含人脸所有API
+*/
+
 package BaiDu_Ai
 
 import (
