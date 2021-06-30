@@ -62,12 +62,12 @@ func (h *HttpSend) Send(methond string) ([]byte, error) {
 			}
 			send_data = string(send_body)
 		} else {
-			send_body := http.Request{}
-			send_body.ParseForm()
+			sendBody := http.Request{}
+			sendBody.ParseForm()
 			for k, v := range h.Body.(map[string]string) {
-				send_body.Form.Add(k, v)
+				sendBody.Form.Add(k, v)
 			}
-			send_data = send_body.Form.Encode()
+			send_data = sendBody.Form.Encode()
 		}
 	}
 	req, err = http.NewRequest(methond, h.Link, strings.NewReader(send_data))
@@ -79,11 +79,11 @@ func (h *HttpSend) Send(methond string) ([]byte, error) {
 	if len(h.Header) == 0 {
 		if strings.ToLower(h.SendType) == SENDTYPE_JSON {
 			h.Header = map[string]string{
-				"Contnet-Type": "application/json; charset=utf-8",
+				"Content-Type": "application/json; charset=utf-8",
 			}
 		} else {
 			h.Header = map[string]string{
-				"Contnet-Type": "application/x-www-form-urlencoded",
+				"Content-Type": "application/x-www-form-urlencoded",
 			}
 		}
 	}
