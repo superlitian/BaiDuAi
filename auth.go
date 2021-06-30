@@ -1,3 +1,14 @@
+/* Copyright 2021 CoderLee Inc. All Rights Reserved. */
+/* auth.go - 鉴权模块 */
+/* modification history
+-----------------------
+2021/6/30, by coderlee, 创建
+*/
+/*
+DESCRIPTION
+	验证ai应用的鉴权信息
+*/
+
 package BaiDu_Ai
 
 const authurl = "https://aip.baidubce.com/oauth/2.0/token"
