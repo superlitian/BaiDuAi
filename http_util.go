@@ -1,3 +1,14 @@
+/* Copyright 2021 CoderLee Inc. All Rights Reserved. */
+/* http_util.go - http通信帮助类 */
+/* modification history
+-----------------------
+2021/6/30, by coderlee, 创建
+*/
+/*
+DESCRIPTION
+该文件对 net/http 进行了封装, 实现了更为灵活的post、get，以及header设置。
+*/
+
 package BaiDu_Ai
 
 import (
@@ -75,6 +86,7 @@ func (h *HttpSend) Send(methond string) ([]byte, error) {
 		return nil, err
 	}
 	defer req.Body.Close()
+
 	//设置默认header
 	if len(h.Header) == 0 {
 		if strings.ToLower(h.SendType) == SENDTYPE_JSON {
