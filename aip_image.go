@@ -1,3 +1,14 @@
+/* Copyright 2021 CoderLee Inc. All Rights Reserved. */
+/* aip_image.go - 图像模块 */
+/* modification history
+-----------------------
+2021/6/30, by coderlee, 创建
+*/
+/*
+DESCRIPTION
+	图像模块的封装，包含：图像搜索，图像特效与增强，图像识别，车辆分析
+*/
+
 package BaiDu_Ai
 
 import (
