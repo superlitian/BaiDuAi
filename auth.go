@@ -20,7 +20,7 @@ func Oauth(apiKey string, secretKey string) string {
 		"client_secret": secretKey,
 	}
 	h := NewHttpSend(GetUrlBuild(authurl, param))
-	res, err := h.Get()
+	res, err = h.Get()
 	if err != nil {
 		return err.Error()
 	}
