@@ -19,7 +19,7 @@ import (
 
 //Typedefs
 
-// AipNlp 内容审核类
+// AipNlp 自然语言类
 type AipNlp struct {
 	appId       string
 	apiKey      string
@@ -35,7 +35,7 @@ type AipNlp struct {
 		- _secretKey Ai应用的secret key
 	RETURNS:
 		- error: 鉴权发生错误
-		- &aipNlp: 内容审核实例
+		- &aipNlp: 自然语言实例
 */
 func NewAipNlp(_appId string, _apiKey string, _secretKey string) (*AipNlp, error) {
 	resp := Oauth(_apiKey, _secretKey)
