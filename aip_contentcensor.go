@@ -11,19 +11,10 @@ DESCRIPTION
 
 package BaiDu_Ai
 
-//Constants
-const (
-	// imgCensorUrl 图像审核url
-	imgCensorUrl = "https://aip.baidubce.com/rest/2.0/solution/v1/img_censor/v2/user_defined"
-
-	// textCensorUrl 文本审核url
-	textCensorUrl = "https://aip.baidubce.com/rest/2.0/solution/v1/text_censor/v2/user_defined"
-
-	// videoCensorUrl 短视频审核url
-	videoCensorUrl = "https://aip.baidubce.com/rest/2.0/solution/v1/video_censor/v2/user_defined"
-
-	// voiceCensorUrl 语音审核url
-	voiceCensorUrl = "https://aip.baidubce.com/rest/2.0/solution/v1/voice_censor/v2/user_defined"
+import (
+	"encoding/json"
+	"errors"
+	"strings"
 )
 
 //Typedefs
@@ -37,6 +28,41 @@ type AipContentCensor struct {
 }
 
 //functions
+
+/*
+	NewAipContentCensor 初始化内容审核模块
+	PARAMS:
+		- _appId: Ai应用的appid
+		- _apiKey: Ai应用的api key
+		- _secretKey Ai应用的secret key
+	RETURNS:
+		- error: 鉴权发生错误
+		- &aipContentCensor: 内容审核实例
+*/
+func NewAipContentCensor(_appId string, _apiKey string, _secretKey string) (*AipContentCensor, error) {
+	resp := Oauth(_apiKey, _secretKey)
+	var data map[string]string
+	json.Unmarshal([]byte(resp), &data)
+	var keys = GetKeys(data)
+	if !In("access_token", keys) {
+		return nil, errors.New(resp)
+	}
+	var _accessToken = data["access_token"]
+	var chartIndex = strings.Index(_accessToken, "-")
+	var tem = _accessToken[chartIndex+1:]
+	if tem != _appId {
+		return nil, errors.New("appId错误，请前往控制台核实")
+	}
+	var t = map[string]string{
+		"access_token": data["access_token"],
+	}
+	return &AipContentCensor{
+		appId:       _appId,
+		apiKey:      _apiKey,
+		secretKey:   _secretKey,
+		accessToken: t,
+	}, nil
+}
 
 /*
 	ImgCensor 图像审核参数为本地图片
