@@ -18,37 +18,6 @@ import (
 )
 
 // Constants
-const (
-	// bodyAnalysisUrl 人体关键点识别url
-	bodyAnalysisUrl = "https://aip.baidubce.com/rest/2.0/image-classify/v1/body_analysis"
-
-	// bodyAttrUrl 人体检测和属性识别url
-	bodyAttrUrl = "https://aip.baidubce.com/rest/2.0/image-classify/v1/body_attr"
-
-	// bodyNumUrl 人流量统计url
-	bodyNumUrl = "https://aip.baidubce.com/rest/2.0/image-classify/v1/body_num"
-
-	// gestureUrl 手势识别url
-	gestureUrl = "https://aip.baidubce.com/rest/2.0/image-classify/v1/gesture"
-
-	// bodySegUrl 人像分割url
-	bodySegUrl = "https://aip.baidubce.com/rest/2.0/image-classify/v1/body_seg"
-
-	// driverBehaviorUrl 驾驶行为分析url
-	driverBehaviorUrl = "https://aip.baidubce.com/rest/2.0/image-classify/v1/driver_behavior"
-
-	// bodyTrackingUrl 人流量统计（动态版）url
-	bodyTrackingUrl = "https://aip.baidubce.com/rest/2.0/image-classify/v1/body_tracking"
-
-	// handAnalysisUrl 手部关键点识别url
-	handAnalysisUrl = "https://aip.baidubce.com/rest/2.0/image-classify/v1/hand_analysis"
-
-	// bodyDangerUrl 危险行为识别url
-	bodyDangerUrl = "https://aip.baidubce.com/rest/2.0/video-classify/v1/body_danger"
-
-	// fingertipUrl 指尖检测url
-	fingertipUrl = "https://aip.baidubce.com/rest/2.0/image-classify/v1/fingertip"
-)
 
 //Typedefs
 
