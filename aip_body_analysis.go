@@ -6,7 +6,7 @@
 */
 /*
 DESCRIPTION
-	人体模块的封装，包含人脸所有API
+	人体模块的封装，包含人体分析所有API
 */
 
 package BaiDu_Ai
