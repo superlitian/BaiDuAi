@@ -60,21 +60,6 @@ type AipBodyAnalysis struct {
 	accessToken map[string]string
 }
 
-//Globals
-
-/*
-	reqUrl 接口地址
-	res 接口返回结果
-	err 错误处理
-	host 连接
-*/
-var (
-	res    []byte
-	err    error
-	reqUrl string
-	host   *HttpSend
-)
-
 //functions
 
 /*
@@ -90,7 +75,7 @@ var (
 func NewAipBodyAnalysis(_appId string, _apiKey string, _secretKey string) (*AipBodyAnalysis, error) {
 	resp := Oauth(_apiKey, _secretKey)
 	var data map[string]string
-	json.Unmarshal([]byte(res), &data)
+	json.Unmarshal([]byte(resp), &data)
 	var keys = GetKeys(data)
 	if !In("access_token", keys) {
 		return nil, errors.New(resp)
