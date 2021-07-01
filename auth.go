@@ -11,8 +11,6 @@ DESCRIPTION
 
 package BaiDu_Ai
 
-const authurl = "https://aip.baidubce.com/oauth/2.0/token"
-
 func Oauth(apiKey string, secretKey string) string {
 	param := map[string]string{
 		"grant_type":    "client_credentials",
