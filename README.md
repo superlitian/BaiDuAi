@@ -23,16 +23,25 @@ import (
 func main(){
    //百度智能云控制台获取的AI应用鉴权信息
    appid:=""
-   apikey:=""
-   secretkey:=""
-   client,err:=BaiDu_Ai.NewAipFace(appid,apikey,secretkey)
-   if err!=nil{
-      fmt.Println(err.Error())
-   }
-   ff,_:=ioutil.ReadFile("本地图片路径")
-   image := base64.StdEncoding.EncodeToString(ff)
-   res:=client.Detect(image,"BASE64",nil)
-   fmt.Println(res)
+	apikey := ""
+	secretkey := ""
+	client, err := BaiDu_Ai.NewAipFace(appid, apikey, secretkey)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	ff, _ := ioutil.ReadFile("本地图片路径")
+	image := base64.StdEncoding.EncodeToString(ff)
+	res := client.Detect(image, "BASE64", nil)
+	fmt.Println(res)
+
+	// 带可选参数调用
+	ff, _ := ioutil.ReadFile("img/yunm.jpeg")
+	image := base64.StdEncoding.EncodeToString(ff)
+	options := map[string]string{
+		"face_field": "age,beauty",
+	}
+	res := client.Detect(image, "BASE64", options)
+	fmt.Println(res)
 }
 ```
 
