@@ -14,15 +14,15 @@
 package main
 
 import (
-   "encoding/base64"
-   "fmt"
-   "github.com/iscoderLee/BaiDuAi"
-   "io/ioutil"
+	"encoding/base64"
+	"fmt"
+	"github.com/iscoderLee/BaiDuAi"
+	"io/ioutil"
 )
 
-func main(){
-   //百度智能云控制台获取的AI应用鉴权信息
-   appid:=""
+func main() {
+	//百度智能云控制台获取的AI应用鉴权信息
+	appid := ""
 	apikey := ""
 	secretkey := ""
 	client, err := BaiDu_Ai.NewAipFace(appid, apikey, secretkey)
@@ -35,7 +35,7 @@ func main(){
 	fmt.Println(res)
 
 	// 带可选参数调用
-	ff, _ := ioutil.ReadFile("img/yunm.jpeg")
+	ff, _ := ioutil.ReadFile("本地图片路径")
 	image := base64.StdEncoding.EncodeToString(ff)
 	options := map[string]string{
 		"face_field": "age,beauty",
