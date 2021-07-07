@@ -23,7 +23,7 @@ import (
 var (
 	GET_METHOD    = "GET"
 	POST_METHOD   = "POST"
-	SENDTYPE_FORM = "from"
+	SENDTYPE_FORM = "form"
 	SENDTYPE_JSON = "json"
 )
 
