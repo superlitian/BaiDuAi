@@ -311,7 +311,6 @@ func (client *AipFace) PersonVerify(image string, image_type string, id_card_num
 func (client *AipFace) Sessioncode(options map[string]string) string {
 	reqUrl = GetUrlBuild(sessioncodeUrl, client.accessToken)
 	host = NewHttpSend(reqUrl)
-	host.SetSendType("JSON")
 	host.SetBody(options)
 	res, err = host.Post()
 	if err != nil {
