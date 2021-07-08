@@ -59,9 +59,9 @@ func main() {
   > )
   > 
   > func main() {
-  > 	appid := "24494480"
-  > 	apikey := "ACpt2CbFtbH7AKqtxGgpirMl"
-  > 	secretkey := "yYjrV7H156RkAzyNIGEgpae1wFXOSDpf"
+  > 	appid := ""
+  > 	apikey := ""
+  > 	secretkey := ""
   > 	client, err := BaiDu_Ai.NewAipSpeech(appid, apikey, secretkey)
   > 	if err!=nil {
   > 		fmt.Println(err)
