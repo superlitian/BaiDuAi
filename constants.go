@@ -512,3 +512,12 @@ const (
 	// fingertipUrl 指尖检测url
 	fingertipUrl = "https://aip.baidubce.com/rest/2.0/image-classify/v1/fingertip"
 )
+
+// speech
+const (
+	// 短语音识别标准版url
+	asrUrl = "http://vop.baidu.com/server_api"
+
+	// 语音合成url
+	synthesisUrl = "https://tsn.baidu.com/text2audio"
+)
