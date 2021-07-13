@@ -155,13 +155,36 @@ func (client *AipNlp) WordEmbSim(word1 string, word2 string) string {
 }
 
 /*
-	DnnlmCn DNN语言模型
+	DnnlmCn DNN语言模型参数为GBK
 	PARAMS:
 		- text: 文本内容，最大256字节，不需要切词
 	RETURNS:
 		- string, 接口返回消息
 */
-func (client *AipNlp) DnnlmCn(text string) string {
+func (client *AipNlp) DnnlmCnGBK(text string) string {
+	reqUrl = GetUrlBuild(dnnlmCnUrl, client.accessToken)
+	var options = map[string]string{
+		"text": text,
+	}
+	host = NewHttpSend(reqUrl)
+	host.SetSendType("JSON")
+	host.SetBody(options)
+	res, err = host.Post()
+	if err != nil {
+		return err.Error()
+	}
+	return string(res)
+}
+
+/*
+	DnnlmCn DNN语言模型UTF8
+	PARAMS:
+		- text: 文本内容，最大256字节，不需要切词
+	RETURNS:
+		- string, 接口返回消息
+*/
+func (client *AipNlp) DnnlmCnUTF8(text string) string {
+	client.accessToken["charset"] = "UTF-8"
 	reqUrl = GetUrlBuild(dnnlmCnUrl, client.accessToken)
 	var options = map[string]string{
 		"text": text,
