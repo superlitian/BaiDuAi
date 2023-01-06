@@ -1,6 +1,6 @@
 # BauDuAi
 
-百度人工智能模块go语言SDK，持续更新中
+由于本人已转部门，ai方向的sdk不再全力更新，如需支持可向我发邮件: litian0123@icloud.com
 
 # 安装
 
